@@ -31,6 +31,9 @@ class LoginRegister extends React.Component {
 
     return (
       <Fragment>
+        <div class="header">
+          Brilliant Pro
+        </div>
         <div class="box-container">
           {this.state.isLoginOpen && <LoginBox/>}
           {!this.state.isLoginOpen && <RegisterBox/>}
@@ -72,7 +75,7 @@ class LoginBox extends React.Component {
 
   render() {
     return (
-      <div class="mx-auto" style={{width:'400px', marginTop:'250px'}}>
+      <div class="mx-auto" style={{width:'400px', marginTop:'200px'}}>
         <div class="header">
           Login to Brilliant Pro
         </div>
@@ -121,7 +124,7 @@ class RegisterBox extends React.Component {
 
   render() {
     return (
-      <div class="mx-auto" style={{width:'400px', marginTop:'250px'}}>
+      <div class="mx-auto" style={{width:'400px', marginTop:'200px'}}>
         <div class="header">
           Register to Brilliant Pro
         </div>
