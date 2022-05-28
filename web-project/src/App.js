@@ -14,13 +14,15 @@ class App extends React.Component {
 
   loginStatus = (data) => {
     if(data===true){
-      alert('Login Successful');
+      this.setState({isLoggedIn: true});
     }
   }
 
   render(){
     return (
-      <LoginRegister loginStatus={this.loginStatus}></LoginRegister>
+      <div className="App">
+        {!this.state.isLoggedIn && <LoginRegister loginStatus={this.loginStatus}></LoginRegister>}
+      </div>
     )
   }
 }
