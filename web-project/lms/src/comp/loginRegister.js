@@ -2,6 +2,7 @@ import "../App.css";
 import React, { Fragment } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../features/user/userSlice";
+import DatePicker from "react-date-picker";
 
 class LoginRegister extends React.Component {
   constructor(props) {
@@ -49,7 +50,7 @@ class LoginRegister extends React.Component {
 
 const LoginBox = () => {
   const dispatch = useDispatch();
-  const userPass = {
+  const userDetails = {
     username: "admin",
     password: "1234",
   };
@@ -59,8 +60,8 @@ const LoginBox = () => {
   const submitLogin = (e) => {
     e.preventDefault();
 
-    if (user === userPass.username && pass === userPass.password) {
-      dispatch(login(userPass));
+    if (user === userDetails.username && pass === userDetails.password) {
+      dispatch(login(userDetails));
     }
   };
   return (
@@ -107,16 +108,44 @@ const LoginBox = () => {
   );
 };
 
-//Register Box
-class RegisterBox extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+export const RegisterBox = () => {
+  const [user, setUser] = React.useState("");
+  const [pass, setPass] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [phone, setPhone] = React.useState("");
+  const [address, setAddress] = React.useState("");
+  const [fullName, setFullName] = React.useState("");
+  const [dob, setDob] = React.useState(new Date());
+  const [registered, setRegistered] = React.useState(false);
 
-  submitRegister(e) {}
+  const dispatch = useDispatch();
 
-  render() {
+  const submitRegister = (e) => {
+    e.preventDefault();
+
+    //IF CONDITIONS MEET(EMAIL,USERNAME IS AVAILABLE)
+    if (user && pass && email) {
+      setRegistered(true);
+    }
+  };
+
+  const submitProfile = (e) => {
+    e.preventDefault();
+
+    dispatch(
+      login({
+        username: user,
+        password: pass,
+        email: email,
+        phone: phone,
+        address: address,
+        fullName: fullName,
+        dob: dob,
+      })
+    );
+  };
+
+  if (!registered) {
     return (
       <div class="mx-auto" style={{ width: "400px", marginTop: "200px" }}>
         <div class="header">Register to Brilliant Pro</div>
@@ -128,6 +157,8 @@ class RegisterBox extends React.Component {
             <input
               type="text"
               name="username"
+              value={user}
+              onChange={(e) => setUser(e.target.value)}
               class="form-control"
               placeholder="Username"
             />
@@ -140,6 +171,8 @@ class RegisterBox extends React.Component {
             <input
               type="email"
               name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               class="form-control"
               placeholder="Email"
             />
@@ -152,6 +185,8 @@ class RegisterBox extends React.Component {
             <input
               type="password"
               name="password"
+              value={pass}
+              onChange={(e) => setPass(e.target.value)}
               class="form-control"
               placeholder="Password"
             />
@@ -159,7 +194,69 @@ class RegisterBox extends React.Component {
           <button
             type="submit"
             class="btn btn-primary"
-            onClick={this.submitRegister.bind(this)}
+            onClick={(e) => submitRegister(e)}
+          >
+            Register
+          </button>
+        </div>
+      </div>
+    );
+  } else if (registered) {
+    return (
+      <div class="mx-auto" style={{ width: "400px" }}>
+        <div class="header">Create a Profile</div>
+        <div class="box">
+          <div class="mb-3">
+            <label class="form-label" htmlFor="fullname">
+              Full Name
+            </label>
+            <input
+              type="text"
+              name="fullname"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              class="form-control"
+              placeholder="Full Name"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" htmlFor="phone">
+              Phone Number
+            </label>
+            <input
+              type="email"
+              name="phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              class="form-control"
+              placeholder="Phone"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" htmlFor="address">
+              Address
+            </label>
+            <input
+              type="text"
+              name="address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              class="form-control"
+              placeholder="Address"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label" htmlFor="address">
+              Date of Birth
+            </label>
+            <DatePicker onChange={setDob} value={dob}></DatePicker>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            onClick={(e) => submitProfile(e)}
           >
             Register
           </button>
@@ -167,6 +264,10 @@ class RegisterBox extends React.Component {
       </div>
     );
   }
-}
+};
+
+export const createProfile = () => {
+  return <div>createProfile</div>;
+};
 
 export default LoginRegister;
