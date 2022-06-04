@@ -3,6 +3,7 @@ import React, { Fragment } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../features/user/userSlice";
 import DatePicker from "react-date-picker";
+import { useNavigate } from "react-router-dom";
 
 class LoginRegister extends React.Component {
   constructor(props) {
@@ -52,6 +53,7 @@ class LoginRegister extends React.Component {
 
 const LoginBox = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const userDetails = {
     username: "Hassan",
     password: "1234",
@@ -71,6 +73,8 @@ const LoginBox = () => {
 
     if (user === userDetails.username && pass === userDetails.password) {
       dispatch(login(userDetails));
+
+      navigate("/");
     }
   };
   return (
@@ -130,6 +134,7 @@ export const RegisterBox = () => {
   const [registered, setRegistered] = React.useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const submitRegister = (e) => {
     e.preventDefault();
@@ -156,6 +161,8 @@ export const RegisterBox = () => {
         isAdmin: false,
       })
     );
+
+    navigate("/");
   };
 
   if (!registered) {
