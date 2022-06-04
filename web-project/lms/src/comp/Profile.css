@@ -1,0 +1,35 @@
+.heading {
+    background-color: #FB3F5C;
+    height: 100px;
+    color: white;
+    padding-inline-start: 20px;
+    padding-inline-end: 20px;
+    padding-top: 30px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    border-bottom: 2px solid #FB3F5C;
+  }
+
+.userProfilePic {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-left: 25%;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.profileEntry {
+    background-color: #FB3F5C;
+    height: auto;
+    margin-inline-start: 30px;
+    margin-inline-end: 30px;
+    color: white;
+    font-size: 20px;
+    padding-inline-start: 10px;
+    padding-inline-end: 10px;
+    border-bottom: 2px solid #FB3F5C;
+    border-radius: 10px 0 10px 0;
+}

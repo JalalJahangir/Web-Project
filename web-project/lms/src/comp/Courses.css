@@ -1,0 +1,59 @@
+.Course-Heading {
+  width: 50%;
+  margin-inline-start: 30px;
+  color: white;
+  padding-inline-start: 20px;
+  font-size: 25px;
+  font-weight: bold;
+  
+  border-radius: "50%";
+}
+
+.CourseEntry {
+    color: white;
+    margin-inline-start: 30px;
+  padding-inline-start: 20px;
+}
+
+#CourseListCards {
+  background-color: #FB3F5C;
+  border-radius: 30px;
+  margin: 10px;
+}
+
+.btn-primary {
+    background-color: #FB3F5C;
+    color: white;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #FB3F5C;
+    width: 100%;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 17px;
+  }
+  
+  .btn-primary:hover, .btn-primary:active, .btn-primary:visited, .btn-primary:focus {
+    background-color: white !important;
+    color: #FB3F5C !important;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #FB3F5C;
+    width: 100%;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 17px;
+  }
+
+.Course {
+    width: "80%";
+    margin-top: "10px";
+    margin-right: "5%";
+}
+
+#courses {
+    display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Nunito", sans-serif;
+}
