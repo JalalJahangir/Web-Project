@@ -23,7 +23,9 @@ class LoginRegister extends React.Component {
   render() {
     return (
       <Fragment>
-        <div class="header">Brilliant Pro</div>
+        <div class="header" style={{ padding: "20px" }}>
+          Brilliant Pro
+        </div>
         <div class="box-container">
           {this.state.isLoginOpen && <LoginBox />}
           {!this.state.isLoginOpen && <RegisterBox />}
@@ -51,8 +53,15 @@ class LoginRegister extends React.Component {
 const LoginBox = () => {
   const dispatch = useDispatch();
   const userDetails = {
-    username: "admin",
+    username: "Hassan",
     password: "1234",
+    email: "mhassanakbaar@gmail.com",
+    phone: "03101744331",
+    address: "31-C, Samnabad, Faisalabad",
+    fullName: "Hassan Akbar",
+    dob: new Date("1999-09-29"),
+    profilePic: "http://localhost:44444/images/adminProfile.png",
+    isAdmin: true,
   };
   const [user, setUser] = React.useState("");
   const [pass, setPass] = React.useState("");
@@ -66,7 +75,9 @@ const LoginBox = () => {
   };
   return (
     <div class="mx-auto" style={{ width: "400px", marginTop: "200px" }}>
-      <div class="header">Login to Brilliant Pro</div>
+      <div class="header" style={{ padding: "20px" }}>
+        Login to Brilliant Pro
+      </div>
       <div class="box">
         <div class="mb-3">
           <label class="form-label" htmlFor="username">
@@ -141,6 +152,8 @@ export const RegisterBox = () => {
         address: address,
         fullName: fullName,
         dob: dob,
+        profilePic: "",
+        isAdmin: false,
       })
     );
   };
@@ -148,7 +161,9 @@ export const RegisterBox = () => {
   if (!registered) {
     return (
       <div class="mx-auto" style={{ width: "400px", marginTop: "200px" }}>
-        <div class="header">Register to Brilliant Pro</div>
+        <div class="header" style={{ padding: "20px" }}>
+          Register to Brilliant Pro
+        </div>
         <div class="box">
           <div class="mb-3">
             <label class="form-label" htmlFor="username">
