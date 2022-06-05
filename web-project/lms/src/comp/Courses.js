@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import "./Courses.css";
 import DatePicker from "react-date-picker";
+import axios from "axios";
 
 const Courses = () => {
   const [courseName, setCourseName] = useState("");
   const [courseDescription, setCourseDescription] = useState("");
+  const [courseImage, setCourseImage] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
@@ -41,6 +43,18 @@ const Courses = () => {
   //handleAddCourse = () => {};
   const submitCourse = (e) => {
     e.preventDefault();
+
+    const data = new FormData();
+    data.append("courseName", courseName);
+    data.append("courseDescription", courseDescription);
+    data.append("courseImage", courseImage);
+    data.append("startDate", startDate);
+    data.append("endDate", endDate);
+
+    axios.post("http://localhost:44444/api/courses", data).then((res) => {
+      console.log(res);
+      setOpenModal(false);
+    });
   };
 
   return (
@@ -122,6 +136,17 @@ const Courses = () => {
                 value={courseDescription}
                 onChange={(e) => setCourseDescription(e.target.value)}
               ></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label" htmlFor="desc">
+                Image
+              </label>
+              <input
+                type={`file`}
+                name="image"
+                onChange={(e) => setCourseImage(e.target.files[0])}
+              />
             </div>
             <div class="mb-3">
               <label class="form-label" htmlFor="startdate">
