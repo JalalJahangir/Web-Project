@@ -8,22 +8,32 @@ const Courses = () => {
   const [courseDescription, setCourseDescription] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+
+  const DATE_OPTIONS = {
+    weekday: "short",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  };
+
   const coursesList = [
     {
       _id: 1,
       cName: "Introduction to Computer Science",
       description:
         "This course is designed to introduce students to the fundamentals of computer science.",
-      cCode: "CS101",
-      cType: "Core",
+      image: "http://localhost:44444/images/cs.jpg",
+      startDate: new Date("2020-01-01"),
+      endDate: new Date("2020-06-20"),
     },
     {
       _id: 2,
       cName: "Introduction to Calculus",
       description:
         "This course is designed to introduce students to the fundamentals of calculus.",
-      cCode: "MATH101",
-      cType: "Core",
+      image: "http://localhost:44444/images/calculus.png",
+      startDate: new Date("2020-01-01"),
+      endDate: new Date("2020-06-20"),
     },
   ];
   const [openModal, setOpenModal] = useState(false);
@@ -38,7 +48,6 @@ const Courses = () => {
       id="courses"
       className="ml"
       style={{
-        width: "80%",
         marginTop: "10px",
         marginLeft: "5%",
       }}
@@ -59,14 +68,29 @@ const Courses = () => {
           Add Course
         </button>
       </div>
-      {coursesList.map((listItem) => (
-        <div id="CourseListCards" className="card">
-          <h3 className="Course-Heading">{listItem.cName}</h3>
-          <h3 className="CourseEntry">{listItem.description}</h3>
-          <h3 className="CourseEntry">{listItem.cCode}</h3>
-          <h3 className="CourseEntry">{listItem.cType}</h3>
+      <div class="container">
+        <div class="row">
+          {coursesList.map((listItem) => (
+            <div class="col-xl-3">
+              <div id="CourseListCards" className="card">
+                <h4 className="Course-Heading">{listItem.cName}</h4>
+                <div className="CourseImageContainer">
+                  <img className="Course-Image" src={listItem.image} alt="" />
+                </div>
+                <p className="CourseEntry">{listItem.description}</p>
+                <span className="CourseEntry">
+                  Course Start:{" "}
+                  {listItem.startDate.toLocaleDateString("en-US", DATE_OPTIONS)}
+                </span>
+                <span className="CourseEntry">
+                  Course End:{" "}
+                  {listItem.endDate.toLocaleDateString("en-US", DATE_OPTIONS)}
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
 
       <Modal show={openModal} onHide={() => setOpenModal(false)}>
         <Modal.Header closeButton>Add Course</Modal.Header>

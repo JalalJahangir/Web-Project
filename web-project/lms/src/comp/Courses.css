@@ -1,18 +1,26 @@
 .Course-Heading {
-  width: 50%;
   margin-inline-start: 30px;
+  margin-inline-end: 30px;
   color: white;
-  padding-inline-start: 20px;
   font-size: 25px;
   font-weight: bold;
-  
-  border-radius: "50%";
+  border-bottom: 2px solid #ffffff;
 }
 
 .CourseEntry {
     color: white;
-    margin-inline-start: 30px;
   padding-inline-start: 20px;
+}
+
+.Course-Image {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+}
+
+.CourseImageContainer {
+  justify-content: center;
+  display: flex;
 }
 
 #CourseListCards {
@@ -45,15 +53,13 @@
     font-size: 17px;
   }
 
-.Course {
-    width: "80%";
-    margin-top: "10px";
-    margin-right: "5%";
-}
-
 #courses {
     display: flex;
   align-items: center;
   flex-direction: column;
   font-family: "Nunito", sans-serif;
+}
+
+.CourseListCards {
+  width: 50rem;
 }
