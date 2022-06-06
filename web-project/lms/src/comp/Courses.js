@@ -3,6 +3,8 @@ import { Modal } from "react-bootstrap";
 import "./Courses.css";
 import DatePicker from "react-date-picker";
 import axios from "axios";
+import CourseDetails from "./CourseDetails";
+import { useNavigate } from "react-router-dom";
 
 const Courses = () => {
   const [courseName, setCourseName] = useState("");
@@ -10,6 +12,8 @@ const Courses = () => {
   const [courseImage, setCourseImage] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+
+  const navigate = useNavigate();
 
   const DATE_OPTIONS = {
     weekday: "short",
@@ -86,7 +90,15 @@ const Courses = () => {
         <div class="row">
           {coursesList.map((listItem) => (
             <div class="col-xl-3">
-              <div id="CourseListCards" className="card">
+              <div
+                id="CourseListCards"
+                className="card"
+                onClick={(e) =>
+                  navigate("/courses/:" + listItem._id, {
+                    state: { course: listItem },
+                  })
+                }
+              >
                 <h4 className="Course-Heading">{listItem.cName}</h4>
                 <div className="CourseImageContainer">
                   <img className="Course-Image" src={listItem.image} alt="" />

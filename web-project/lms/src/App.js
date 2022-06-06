@@ -10,6 +10,7 @@ import WithoutNav from "./comp/WithoutNav";
 import WithNav from "./comp/WithNav";
 import Profile from "./comp/Profile";
 import Courses from "./comp/Courses";
+import CourseDetails from "./comp/CourseDetails";
 
 const App = () => {
   const user = useSelector(selectUser);
@@ -24,6 +25,7 @@ const App = () => {
           <Route exact path="/" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/courses" element={<Courses />} />
+          <Route path="/courses/:id" element={<CourseDetails />} />
         </Route>
         <Route path="*" element={<EmptyPage />} />
       </Routes>
