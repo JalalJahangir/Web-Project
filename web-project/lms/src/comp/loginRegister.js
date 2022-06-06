@@ -139,6 +139,8 @@ export const RegisterBox = () => {
   const submitRegister = (e) => {
     e.preventDefault();
 
+    
+
     //IF CONDITIONS MEET(EMAIL,USERNAME IS AVAILABLE)
     if (user && pass && email) {
       setRegistered(true);
