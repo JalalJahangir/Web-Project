@@ -169,36 +169,59 @@ export const RegisterBox = () => {
   const submitProfile = (e) => {
     e.preventDefault();
 
-    const data = new FormData();
-    data.append("username", user);
-    data.append("password", pass);
-    data.append("email", email);
-    data.append("phone", phone);
-    data.append("address", address);
-    data.append("fullName", fullName);
-    data.append("dob", dob);
-    data.append("profilePic", profilePic);
-    data.append("isAdmin", false);
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data; boundary=XXX",
+      },
+    };
 
-    console.log("trigger");
-    axios.post("http://localhost:44444/api/user/register", data).then((res) => {
-      dispatch(
-        login({
-          username: user,
-          password: pass,
-          email: email,
-          phone: phone,
-          address: address,
-          fullName: fullName,
-          dob: dob,
-          profilePic: res.data.profilePic,
-          isAdmin: false,
-        })
-      );
-      alert(res.data.profilePic);
-
-      navigate("/");
+    console.log({
+      username: user,
+      password: pass,
+      email: email,
+      phone: phone,
+      address: address,
+      fullName: fullName,
+      dob: dob,
     });
+
+    const data = new FormData();
+    data.append("profilePic", profilePic);
+    axios
+      .post(
+        "http://localhost:44444/api/register?username=" +
+          user +
+          "&password=" +
+          pass +
+          "&email=" +
+          email +
+          "&phone=" +
+          phone +
+          "&address=" +
+          address +
+          "&dob=" +
+          dob +
+          "&fullName=" +
+          fullName,
+        data
+      )
+      .then((res) => {
+        console.log(res.data.user);
+        dispatch(
+          login({
+            username: res.data.user.username,
+            password: res.data.user.password,
+            email: res.data.user.email,
+            phone: res.data.user.phone,
+            address: res.data.user.address,
+            fullName: res.data.user.fullName,
+            dob: new Date(res.data.user.dob),
+            profilePic: res.data.user.profilePic,
+            isAdmin: res.data.user.isAdmin,
+          })
+        );
+        navigate("/");
+      });
   };
 
   if (!registered) {

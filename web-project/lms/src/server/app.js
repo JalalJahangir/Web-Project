@@ -16,7 +16,7 @@ mongoose.connect(
   }
 );
 
-const User = require("./models/user");
+const User = require("./model/user");
 
 var bodyParser = require("body-parser");
 
@@ -91,6 +91,7 @@ app.post("/api/login", function (req, res) {
         res.send({
           success: false,
           message: "Incorrect password",
+          
         });
       } else {
         console.log(user);
@@ -107,6 +108,46 @@ app.post("/api/login", function (req, res) {
 });
 
 //http://localhost:44444/api/user/register
+
+app.post("/api/register", (req, res) => {
+  let user1 = new User();
+  user1.username = req.body.username ; 
+  user1.password = req.body.password ; 
+  user1.email = req.body.email;
+  user1.phone = req.body.phone ; 
+  user1.address = req.body.address ; 
+  user1.dob = req.body.dob ; 
+  user1.fullName = req.body.fullName
+  user1.profilePic = req.body.profilePic; 
+  user1.isAdmin = req.body.isAdmin;
+
+  user1.findOne({
+    email: req.body.email
+  }, (err, existingUser) => {
+    if (existingUser) {
+      res.json({
+        success: false,
+        message: "Account with that email is already exists",
+      });
+    } else {
+      user1.save();
+
+      var token = jwt.sign({
+          user: user1,
+        },
+        "lms", {
+          expiresIn: "7d",
+        }
+      );
+
+      res.json({
+        success: true,
+        message: "Token Success",
+        token: token,
+      });
+    }
+  });
+});
 
 // Server setup
 app.listen(PORT, () => {
