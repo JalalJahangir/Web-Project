@@ -2,6 +2,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
+const formidableMiddleware = require("express-formidable");
 
 mongoose.connect(
   "mongodb://127.0.0.1:27017/lms",
@@ -23,7 +24,8 @@ var bodyParser = require("body-parser");
 const app = express();
 var cors = require("cors");
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(formidableMiddleware());
 
 // Defining port number
 const PORT = 44444;
@@ -70,9 +72,8 @@ app.post(
 );
 
 app.post("/api/login", function (req, res) {
-  let user = new User();
-  console.log(req.body);
-  user.findOne({ userName: res.body.username }, function (err, user) {
+  let user1 = new User();
+  User.findOne({ userName: req.params.username }, function (err, user) {
     if (err) {
       console.log(err);
       throw err;
@@ -93,6 +94,9 @@ app.post("/api/login", function (req, res) {
         });
       } else {
         console.log(user);
+        console.log(user.dob);
+        user.dob = new Date(user.dob);
+        console.log(user.dob);
         res.send({
           success: true,
           user: user,
