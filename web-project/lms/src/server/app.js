@@ -1,7 +1,7 @@
 // Requiring module
 var router = express.Router();
 const mongoose = require('mongoose');
-const User = mongoose.model('user');
+//const User = mongoose.model('user');
 
 
 const express = require("express");

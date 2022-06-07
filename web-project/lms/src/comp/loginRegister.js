@@ -72,11 +72,30 @@ const LoginBox = () => {
   const submitLogin = (e) => {
     e.preventDefault();
 
-    if (user === userDetails.username && pass === userDetails.password) {
-      dispatch(login(userDetails));
-
-      navigate("/");
-    }
+    axios
+      .post(
+        "http://localhost:44444/api/login?username=" +
+          user +
+          "&password=" +
+          pass
+      )
+      .then((res) => {
+        console.log(res.data.user);
+        dispatch(
+          login({
+            username: res.data.user.username,
+            password: res.data.user.password,
+            email: res.data.user.email,
+            phone: res.data.user.phone,
+            address: res.data.user.address,
+            fullName: res.data.user.fullName,
+            dob: new Date(res.data.user.dob),
+            profilePic: res.data.user.profilePic,
+            isAdmin: res.data.user.isAdmin,
+          })
+        );
+        navigate("/");
+      });
   };
   return (
     <div class="mx-auto" style={{ width: "400px", marginTop: "200px" }}>
@@ -161,7 +180,7 @@ export const RegisterBox = () => {
     data.append("profilePic", profilePic);
     data.append("isAdmin", false);
 
-    console.log("trigger"); 
+    console.log("trigger");
     axios.post("http://localhost:44444/api/user/register", data).then((res) => {
       dispatch(
         login({
