@@ -72,15 +72,30 @@ const LoginBox = () => {
   const submitLogin = (e) => {
     e.preventDefault();
 
-    const data = new FormData();
-    data.append("username", user);
-    data.append("password", pass);
-
-    axios.post("http://localhost:44444/api/login", data).then((res) => {
-      console.log(res.data.user);
-      dispatch(login(res.data.user));
-      navigate("/");
-    });
+    axios
+      .post(
+        "http://localhost:44444/api/login?username=" +
+          user +
+          "&password=" +
+          pass
+      )
+      .then((res) => {
+        console.log(res.data.user);
+        dispatch(
+          login({
+            username: res.data.user.username,
+            password: res.data.user.password,
+            email: res.data.user.email,
+            phone: res.data.user.phone,
+            address: res.data.user.address,
+            fullName: res.data.user.fullName,
+            dob: new Date(res.data.user.dob),
+            profilePic: res.data.user.profilePic,
+            isAdmin: res.data.user.isAdmin,
+          })
+        );
+        navigate("/");
+      });
   };
   return (
     <div class="mx-auto" style={{ width: "400px", marginTop: "200px" }}>
