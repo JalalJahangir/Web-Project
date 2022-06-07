@@ -1,19 +1,31 @@
 // Requiring module
 const express = require("express");
-
-var router = express.Router();
-const mongoose = require('mongoose');
-//const User = mongoose.model('user');
-
-
+const mongoose = require("mongoose");
 const path = require("path");
+const formidableMiddleware = require("express-formidable");
+
+mongoose.connect(
+  "mongodb://127.0.0.1:27017/lms",
+  { useNewUrlParser: true },
+  (err) => {
+    if (!err) {
+      console.log("MongoDB Connection Succeeded.");
+    } else {
+      console.log("Error in DB connection : " + err);
+    }
+  }
+);
+
+const User = require("./models/user");
+
 var bodyParser = require("body-parser");
 
 // Creating express object
 const app = express();
 var cors = require("cors");
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(formidableMiddleware());
 
 // Defining port number
 const PORT = 44444;
@@ -58,6 +70,41 @@ app.post(
     }
   }
 );
+
+app.post("/api/login", function (req, res) {
+  let user1 = new User();
+  User.findOne({ userName: req.params.username }, function (err, user) {
+    if (err) {
+      console.log(err);
+      throw err;
+    }
+    if (!user) {
+      res.send({
+        success: false,
+        message: "User account cannot be found",
+      });
+    } else if (user) {
+      console.log("it goes here");
+
+      var validPassword = req.body.password === user.password;
+      if (!validPassword) {
+        res.send({
+          success: false,
+          message: "Incorrect password",
+        });
+      } else {
+        console.log(user);
+        console.log(user.dob);
+        user.dob = new Date(user.dob);
+        console.log(user.dob);
+        res.send({
+          success: true,
+          user: user,
+        });
+      }
+    }
+  });
+});
 
 //http://localhost:44444/api/user/register
 
