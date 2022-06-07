@@ -43,6 +43,7 @@ app.post("/api/courses", upload.single("courseImage"), function (req, res) {
   res.end("File not uploaded");
 });
 
+<<<<<<< HEAD
 //for register 
 app.post("/api/register" , function(req,res){
 
@@ -70,6 +71,24 @@ app.post("/api/register" , function(req,res){
   }
 
 }); 
+=======
+app.post(
+  "/api/user/register",
+  upload.single("profilePic"),
+  function (req, res) {
+    if (req.file) {
+      console.dir(req.file);
+      res.send({
+        profilePic:
+          "http://localhost:44444/" +
+          req.file.path.replace("public", "").replace(/\\/g, "/"),
+      });
+    }
+  }
+);
+
+//http://localhost:44444/api/user/register
+>>>>>>> 53dd4c2228c1a7dd1ba557feeb45231f716cfb3b
 
 // Server setup
 app.listen(PORT, () => {
