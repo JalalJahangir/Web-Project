@@ -1,10 +1,21 @@
 // Requiring module
-var router = express.Router();
-const mongoose = require("mongoose");
-const User = mongoose.model("user");
-
 const express = require("express");
+const mongoose = require("mongoose");
 const path = require("path");
+
+mongoose.connect(
+  "mongodb://127.0.0.1:27017/lms",
+  { useNewUrlParser: true },
+  (err) => {
+    if (!err) {
+      console.log("MongoDB Connection Succeeded.");
+    } else {
+      console.log("Error in DB connection : " + err);
+    }
+  }
+);
+
+const User = require("./models/user");
 
 var bodyParser = require("body-parser");
 
@@ -58,7 +69,38 @@ app.post(
   }
 );
 
-app.post("/api/login", function (req, res) {});
+app.post("/api/login", function (req, res) {
+  let user = new User();
+  console.log(req.body);
+  user.findOne({ userName: res.body.username }, function (err, user) {
+    if (err) {
+      console.log(err);
+      throw err;
+    }
+    if (!user) {
+      res.send({
+        success: false,
+        message: "User account cannot be found",
+      });
+    } else if (user) {
+      console.log("it goes here");
+
+      var validPassword = req.body.password === user.password;
+      if (!validPassword) {
+        res.send({
+          success: false,
+          message: "Incorrect password",
+        });
+      } else {
+        console.log(user);
+        res.send({
+          success: true,
+          user: user,
+        });
+      }
+    }
+  });
+});
 
 //http://localhost:44444/api/user/register
 
