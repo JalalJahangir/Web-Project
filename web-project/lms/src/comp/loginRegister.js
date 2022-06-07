@@ -72,11 +72,11 @@ const LoginBox = () => {
   const submitLogin = (e) => {
     e.preventDefault();
 
-    // if (user === userDetails.username && pass === userDetails.password) {
-    //   dispatch(login(userDetails));
+    if (user === userDetails.username && pass === userDetails.password) {
+      dispatch(login(userDetails));
 
-    //   navigate("/");
-    // }
+      navigate("/");
+    }
   };
   return (
     <div class="mx-auto" style={{ width: "400px", marginTop: "200px" }}>
@@ -141,8 +141,6 @@ export const RegisterBox = () => {
   const submitRegister = (e) => {
     e.preventDefault();
 
-    
-
     //IF CONDITIONS MEET(EMAIL,USERNAME IS AVAILABLE)
     if (user && pass && email) {
       setRegistered(true);
@@ -162,6 +160,8 @@ export const RegisterBox = () => {
     data.append("dob", dob);
     data.append("profilePic", profilePic);
     data.append("isAdmin", false);
+
+    console.log("trigger"); 
     axios.post("http://localhost:44444/api/user/register", data).then((res) => {
       dispatch(
         login({
