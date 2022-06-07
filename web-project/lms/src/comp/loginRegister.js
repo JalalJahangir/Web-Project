@@ -169,6 +169,8 @@ export const RegisterBox = () => {
     data.append("dob", dob);
     data.append("profilePic", profilePic);
     data.append("isAdmin", false);
+
+    console.log("trigger");
     axios.post("http://localhost:44444/api/user/register", data).then((res) => {
       dispatch(
         login({
