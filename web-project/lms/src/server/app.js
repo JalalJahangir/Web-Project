@@ -38,6 +38,23 @@ app.post("/api/courses", upload.single("courseImage"), function (req, res) {
   res.end("File not uploaded");
 });
 
+app.post(
+  "/api/user/register",
+  upload.single("profilePic"),
+  function (req, res) {
+    if (req.file) {
+      console.dir(req.file);
+      res.send({
+        profilePic:
+          "http://localhost:44444/" +
+          req.file.path.replace("public", "").replace(/\\/g, "/"),
+      });
+    }
+  }
+);
+
+//http://localhost:44444/api/user/register
+
 // Server setup
 app.listen(PORT, () => {
   console.log(`Running server on PORT ${PORT}...`);

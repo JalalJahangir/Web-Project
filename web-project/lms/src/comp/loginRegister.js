@@ -141,8 +141,6 @@ export const RegisterBox = () => {
   const submitRegister = (e) => {
     e.preventDefault();
 
-    
-
     //IF CONDITIONS MEET(EMAIL,USERNAME IS AVAILABLE)
     if (user && pass && email) {
       setRegistered(true);
@@ -152,7 +150,7 @@ export const RegisterBox = () => {
   const submitProfile = (e) => {
     e.preventDefault();
 
-    const data = FormData();
+    const data = new FormData();
     data.append("username", user);
     data.append("password", pass);
     data.append("email", email);
@@ -176,6 +174,7 @@ export const RegisterBox = () => {
           isAdmin: false,
         })
       );
+      alert(res.data.profilePic);
 
       navigate("/");
     });
@@ -255,6 +254,17 @@ export const RegisterBox = () => {
               onChange={(e) => setFullName(e.target.value)}
               class="form-control"
               placeholder="Full Name"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" htmlFor="image">
+              Image
+            </label>
+            <input
+              type={`file`}
+              name="image"
+              onChange={(e) => setProfilePic(e.target.files[0])}
             />
           </div>
 
