@@ -1,8 +1,7 @@
 // Requiring module
 var router = express.Router();
-const mongoose = require('mongoose');
-const User = mongoose.model('user');
-
+const mongoose = require("mongoose");
+const User = mongoose.model("user");
 
 const express = require("express");
 const path = require("path");
@@ -44,35 +43,6 @@ app.post("/api/courses", upload.single("courseImage"), function (req, res) {
   res.end("File not uploaded");
 });
 
-<<<<<<< HEAD
-//for register 
-app.post("/api/register" , function(req,res){
-
-
-  if(req.file){
-
-    var user = new User();
-    user.userName = req.body.userName ;
-    user.password = req.body.password ; 
-
-    user.email = req.body.email ;
-    user.phone = req.body.phone ;
-    
-    user.address = req.body.address ;
-    user.fullName = req.body.fullName ;
-    
-    user.dob = req.body.dob ;
-    user.registered = req.body.registered ;  
-   
-    user.save((err, doc) => {
-        if (!err)
-            res.redirect('/login');
-    });
-
-  }
-
-}); 
-=======
 app.post(
   "/api/user/register",
   upload.single("profilePic"),
@@ -91,7 +61,6 @@ app.post(
 app.post("/api/login", function (req, res) {});
 
 //http://localhost:44444/api/user/register
->>>>>>> 53dd4c2228c1a7dd1ba557feeb45231f716cfb3b
 
 // Server setup
 app.listen(PORT, () => {
