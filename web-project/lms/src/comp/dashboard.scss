@@ -1,0 +1,254 @@
+.dashboardProfile {
+    height: 65px;
+    width: 65px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.wrapper {
+    position: relative;
+    top: 0;
+    height: 100vh; 
+  }
+  
+.sidebar {
+    position: fixed;
+    top: 0;
+    height: 100%;
+    bottom: 0;
+    width: 260px;
+    left: 0;
+    z-index: 500;
+    border-right: 1px solid #ddd;
+    margin-top: 100px;
+}
+
+.sidebar .sidebar-wrapper {
+    position: relative;
+    height: calc(100vh - 75px);
+    overflow: auto;
+    width: 260px;
+    z-index: 4;
+    padding-bottom: 100px; 
+}
+
+.sidebar .sidebar-wrapper {
+    scrollbar-color: #FB3F5C #e0e0e0;
+    scrollbar-width: thin;
+}
+
+.sidebar .sidebar-wrapper :webkit-scrollbar-track {
+    border-radius: 2px;
+}
+
+
+.sidebar .nav {
+    margin-top: 20px;
+    display: block;
+}
+
+.sidebar .nav li > a + div .nav li > a {
+    margin-top: 7px;
+}
+
+.sidebar .nav li > a {
+    margin: 10px 15px 0;
+    color: black;
+    display: block;
+    text-decoration: none;
+    position: relative;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 10px 8px;
+    line-height: 30px;
+    opacity: .7; 
+}
+
+.sidebar .nav li .nav > li > a {
+    padding: 5px 8px;
+}
+
+.sidebar .nav li.active > a,
+.sidebar .nav li.active > a > i {
+    opacity: 1;
+}
+
+.sidebar .nav li:hover:not(.active) > a,
+.sidebar .nav li:focus:not(.active) > a {
+    opacity: 1;
+}
+
+.sidebar .nav li {
+    transition: 0.5s all ease-in-out;
+}
+
+.sidebar .nav li:hover {
+    transition: 0.2s all ease-in-out;
+    background-color: #FB3F5C;
+}
+
+.sidebar .nav li:hover .sidet{
+    color: white;
+}
+
+.sidebar .nav i {
+    font-size: 24px;
+    float: left;
+    margin-right: 12px;
+    line-height: 30px;
+    width: 34px;
+    text-align: center;
+    color: black;
+    position: relative;
+}
+
+.sidebar .nav p {
+    margin-bottom: 0;
+}
+
+.sidebar .nav .collapse .nav,
+.sidebar .nav .collapsing .nav {
+    margin-top: 0;
+}
+
+.sidebar:before, .sidebar:after {
+    display: block;
+    content: "";
+    opacity: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.sidebar:after {
+    background: #66615B;
+    background: linear-gradient(#66615B 0%, #000 80%);
+    z-index: 3;
+}
+
+.sidebar[data-color="white"]:after {
+    background: #FFFFFF;
+}
+
+.sidebar[data-color="white"] .nav li a,
+.sidebar[data-color="white"] .nav li a i,
+.sidebar[data-color="white"] .nav li a[data-toggle="collapse"],
+.sidebar[data-color="white"] .nav li a[data-toggle="collapse"] i,
+.sidebar[data-color="white"] .nav li a[data-toggle="collapse"] ~ div > ul > li > a {
+    color: #66615B;
+    opacity: .7;
+}
+
+.sidebar[data-color="white"] .nav li:hover:not(.active) > a,
+.sidebar[data-color="white"] .nav li:focus:not(.active) > a {
+    opacity: 1;
+}
+
+.sidebar[data-color="black"]:after {
+    background: #212120;
+
+}
+
+.sidebar[data-active-color="primary"] .nav li.active > a,
+.sidebar[data-active-color="primary"] .nav li.active > a i,
+.sidebar[data-active-color="primary"] .nav li.active > a[data-toggle="collapse"],
+.sidebar[data-active-color="primary"] .nav li.active > a[data-toggle="collapse"] i,
+.sidebar[data-active-color="primary"] .nav li.active > a[data-toggle="collapse"] ~ div > ul > li.active > a {
+    color: #51cbce;
+    opacity: 1;
+}
+
+.sidebar[data-active-color="info"] .nav li.active > a,
+.sidebar[data-active-color="info"] .nav li.active > a i,
+.sidebar[data-active-color="info"] .nav li.active > a[data-toggle="collapse"],
+.sidebar[data-active-color="info"] .nav li.active > a[data-toggle="collapse"] i,
+.sidebar[data-active-color="info"] .nav li.active > a[data-toggle="collapse"] ~ div > ul > li.active > a {
+    color: #51bcda;
+    opacity: 1;
+}
+
+.sidebar[data-active-color="success"] .nav li.active > a,
+.sidebar[data-active-color="success"] .nav li.active > a i,
+.sidebar[data-active-color="success"] .nav li.active > a[data-toggle="collapse"],
+.sidebar[data-active-color="success"] .nav li.active > a[data-toggle="collapse"] i,
+.sidebar[data-active-color="success"] .nav li.active > a[data-toggle="collapse"] ~ div > ul > li.active > a {
+    color: #6bd098;
+    opacity: 1;
+}
+
+.sidebar[data-active-color="warning"] .nav li.active > a,
+.sidebar[data-active-color="warning"] .nav li.active > a i,
+.sidebar[data-active-color="warning"] .nav li.active > a[data-toggle="collapse"],
+.sidebar[data-active-color="warning"] .nav li.active > a[data-toggle="collapse"] i,
+.sidebar[data-active-color="warning"] .nav li.active > a[data-toggle="collapse"] ~ div > ul > li.active > a {
+    color: #fbc658;
+    opacity: 1;
+}
+
+.sidebar[data-active-color="danger"] .nav li.active > a,
+.sidebar[data-active-color="danger"] .nav li.active > a i,
+.sidebar[data-active-color="danger"] .nav li.active > a[data-toggle="collapse"],
+.sidebar[data-active-color="danger"] .nav li.active > a[data-toggle="collapse"] i,
+.sidebar[data-active-color="danger"] .nav li.active > a[data-toggle="collapse"] ~ div > ul > li.active > a {
+    color: #ef8157;
+    opacity: 1;
+}
+
+.sidebar[data-active-color="default"] .nav li.active > a,
+.sidebar[data-active-color="default"] .nav li.active > a i,
+.sidebar[data-active-color="default"] .nav li.active > a[data-toggle="collapse"],
+.sidebar[data-active-color="default"] .nav li.active > a[data-toggle="collapse"] i,
+.sidebar[data-active-color="default"] .nav li.active > a[data-toggle="collapse"] ~ div > ul > li.active > a {
+    color: #66615B;
+    opacity: 1;
+}
+
+.container {
+    position:absolute;
+    width:100%;
+    height:100vh;
+    background: #2c302d;
+}
+
+.card {
+    width: 70%;
+    height: 100%;
+    padding: auto;
+    text-align: center;
+    background: white;
+    border-radius: 10px;
+    border-color: #FB3F5C;
+    margin: 10px 10px 10px 10px;
+    &__container {
+        padding-top: 50px;
+        width: 80%;
+        height: 100%;
+        grid-template-columns: 2fr 2fr;
+        align-items: center;
+        justify-items: center;
+        color: white;
+    }
+    &__content {
+        width: 90%;
+        height: 95%;
+        background: #FB3F5C;
+        margin: 10px auto;
+        border-radius: 5px;
+        padding: 20px;
+        cursor: pointer;
+        transition: 0.1s all ease-in-out;
+        &:hover {
+            margin-top:-10px;
+            transition: 0.3s;
+        }
+    }
+    &__header {
+        text-transform: uppercase;
+        font-size: 20px;
+        margin: 40px auto;
+    }
+    
+}

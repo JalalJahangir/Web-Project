@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUser, logout } from "../features/user/userSlice";
 import { Link, useNavigate } from "react-router-dom";
 
-import "./dashboard.css";
+import "./dashboard.scss";
 
 const NavBar = () => {
   const user = useSelector(selectUser);
