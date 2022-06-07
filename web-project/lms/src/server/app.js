@@ -1,6 +1,7 @@
 // Requiring module
 const express = require("express");
 const path = require("path");
+
 var bodyParser = require("body-parser");
 
 // Creating express object
@@ -52,6 +53,8 @@ app.post(
     }
   }
 );
+
+app.post("/api/login", function (req, res) {});
 
 //http://localhost:44444/api/user/register
 

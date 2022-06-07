@@ -72,11 +72,20 @@ const LoginBox = () => {
   const submitLogin = (e) => {
     e.preventDefault();
 
-    // if (user === userDetails.username && pass === userDetails.password) {
-    //   dispatch(login(userDetails));
+    const data = new FormData();
+    data.append("username", user);
+    data.append("password", pass);
 
-    //   navigate("/");
-    // }
+    axios.post("http://localhost:44444/api/login", data).then((res) => {
+      dispatch(login(res.data));
+      navigate("/");
+    });
+
+    if (user === userDetails.username && pass === userDetails.password) {
+      dispatch(login(userDetails));
+
+      navigate("/");
+    }
   };
   return (
     <div class="mx-auto" style={{ width: "400px", marginTop: "200px" }}>
