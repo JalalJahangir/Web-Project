@@ -5,8 +5,13 @@ import DatePicker from "react-date-picker";
 import axios from "axios";
 import CourseDetails from "./CourseDetails";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/user/userSlice";
 
 const Courses = () => {
+  const user = useSelector(selectUser);
+  const isAdmin = user.isAdmin;
+
   const [courseName, setCourseName] = useState("");
   const [courseDescription, setCourseDescription] = useState("");
   const [courseImage, setCourseImage] = useState("");
@@ -20,6 +25,22 @@ const Courses = () => {
     year: "numeric",
     month: "short",
     day: "numeric",
+  };
+
+  const renderAdminButtons = () => {
+    if (isAdmin) {
+      return (
+        <div>
+          <button
+            className="btn-primary"
+            style={{ width: "200px", marginLeft: "30px" }}
+            onClick={(e) => setOpenModal(true)}
+          >
+            Add Course
+          </button>
+        </div>
+      );
+    }
   };
 
   const coursesList = [
@@ -77,14 +98,7 @@ const Courses = () => {
         >
           Courses
         </h1>
-
-        <button
-          className="btn-primary"
-          style={{ width: "200px", marginLeft: "30px" }}
-          onClick={(e) => setOpenModal(true)}
-        >
-          Add Course
-        </button>
+        {renderAdminButtons()}
       </div>
       <div class="container">
         <div class="row">

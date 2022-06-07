@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { login } from "../features/user/userSlice";
 import DatePicker from "react-date-picker";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 class LoginRegister extends React.Component {
   constructor(props) {
@@ -71,11 +72,11 @@ const LoginBox = () => {
   const submitLogin = (e) => {
     e.preventDefault();
 
-    if (user === userDetails.username && pass === userDetails.password) {
-      dispatch(login(userDetails));
+    // if (user === userDetails.username && pass === userDetails.password) {
+    //   dispatch(login(userDetails));
 
-      navigate("/");
-    }
+    //   navigate("/");
+    // }
   };
   return (
     <div class="mx-auto" style={{ width: "400px", marginTop: "200px" }}>
@@ -131,6 +132,7 @@ export const RegisterBox = () => {
   const [address, setAddress] = React.useState("");
   const [fullName, setFullName] = React.useState("");
   const [dob, setDob] = React.useState(new Date());
+  const [profilePic, setProfilePic] = React.useState("");
   const [registered, setRegistered] = React.useState(false);
 
   const dispatch = useDispatch();
@@ -148,21 +150,33 @@ export const RegisterBox = () => {
   const submitProfile = (e) => {
     e.preventDefault();
 
-    dispatch(
-      login({
-        username: user,
-        password: pass,
-        email: email,
-        phone: phone,
-        address: address,
-        fullName: fullName,
-        dob: dob,
-        profilePic: "",
-        isAdmin: false,
-      })
-    );
+    const data = FormData();
+    data.append("username", user);
+    data.append("password", pass);
+    data.append("email", email);
+    data.append("phone", phone);
+    data.append("address", address);
+    data.append("fullName", fullName);
+    data.append("dob", dob);
+    data.append("profilePic", profilePic);
+    data.append("isAdmin", false);
+    axios.post("http://localhost:44444/api/user/register", data).then((res) => {
+      dispatch(
+        login({
+          username: user,
+          password: pass,
+          email: email,
+          phone: phone,
+          address: address,
+          fullName: fullName,
+          dob: dob,
+          profilePic: res.data.profilePic,
+          isAdmin: false,
+        })
+      );
 
-    navigate("/");
+      navigate("/");
+    });
   };
 
   if (!registered) {

@@ -1,7 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/user/userSlice";
 import { useLocation } from "react-router-dom";
 
 const CourseDetails = () => {
+  const user = useSelector(selectUser);
+  const isAdmin = user.isAdmin;
   const DATE_OPTIONS = {
     weekday: "short",
     year: "numeric",
@@ -10,6 +14,21 @@ const CourseDetails = () => {
   };
   const { state } = useLocation();
   const course = state.course;
+
+  const RenderAdminButtons = () => {
+    if (isAdmin) {
+      return (
+        <div>
+          <button className="btn-primary" style={{ width: "100%" }}>
+            Add Material
+          </button>
+          <button className="btn-primary" style={{ width: "100%" }}>
+            Add Assessment
+          </button>
+        </div>
+      );
+    }
+  };
 
   return (
     <div>
@@ -39,13 +58,8 @@ const CourseDetails = () => {
       </div>
 
       <div style={{ display: "flex" }}>
-        <div style={{ width: "20rem" }}>
-          <button className="btn-primary" style={{ width: "100%" }}>
-            Add Material
-          </button>
-          <button className="btn-primary" style={{ width: "100%" }}>
-            Add Assessment
-          </button>
+        <div style={{ width: "20rem", margin: "10px" }}>
+          {RenderAdminButtons()}
         </div>
         <div id="CourseListCards" className="card" style={{ width: "100%" }}>
           <h4 className="Course-Heading">Course Assessment</h4>
