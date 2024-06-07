@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 
+const mongodbURL = "mongodb://localhost:27017/lms";
+
 mongoose.connect(
-  "mongodb://localhost:27017/lms",
+  mongodbURL,
   { useNewUrlParser: true },
   (err) => {
     if (!err) {
