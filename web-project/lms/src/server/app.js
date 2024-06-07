@@ -4,8 +4,10 @@ const mongoose = require("mongoose");
 const path = require("path");
 const formidableMiddleware = require("express-formidable");
 
+const mongodbURL = "mongodb://127.0.0.1:27017/lms";
+
 mongoose.connect(
-  "mongodb://127.0.0.1:27017/lms",
+  mongodbURL,
   { useNewUrlParser: true },
   (err) => {
     if (!err) {
@@ -56,6 +58,8 @@ app.post("/api/courses", upload.single("courseImage"), function (req, res) {
   res.end("File not uploaded");
 });
 
+const senderURL = "http://localhost:44444/";
+
 app.post(
   "/api/user/register",
   upload.single("profilePic"),
@@ -64,7 +68,7 @@ app.post(
       console.dir(req.file);
       res.send({
         profilePic:
-          "http://localhost:44444/" +
+          senderURL +
           req.file.path.replace("public", "").replace(/\\/g, "/"),
       });
     }
@@ -107,7 +111,7 @@ app.post("/api/login", function (req, res) {
   });
 });
 
-//http://localhost:44444/api/user/register
+//http://localhost:44444/api/user/register website URL
 
 app.post("/api/register", (req, res) => {
   let user1 = new User();
